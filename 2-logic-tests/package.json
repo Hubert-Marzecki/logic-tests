@@ -1,0 +1,33 @@
+{
+  "name": "swing-dev-mastaz-logic-tests",
+  "version": "1.0.0",
+  "description": "A repository of logic tasks for people who want to attend the SwingDev MaStaż internship program",
+  "engines": {
+    "node": ">= 12.13 <13"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "7.9.6",
+    "@babel/preset-env": "7.9.6",
+    "@types/jest": "25.2.1",
+    "@types/node": "12.12.38",
+    "babel-jest": "26.0.1",
+    "jest": "25.5.4",
+    "rimraf": "3.0.2",
+    "ts-jest": "25.5.0",
+    "tslib": "1.11.2",
+    "tsutils": "3.17.1",
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "jest --watch",
+    "test": "jest",
+    "test1": "jest -t 'Task1'",
+    "test2": "jest -t 'Task2'",
+    "test:watch": "jest --watch",
+    "test1:watch": "jest --watch -t 'Task1'",
+    "test2:watch": "jest --watch -t 'Task2'"
+  },
+  "author": "Aleksander Stós <aleksander.stos@swing.dev>",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -1,0 +1,206 @@
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+//@font-face {
+//  font-family: "Jost-medium";
+//  src: url('./assets/Jost-500-Medium.ttf');
+//}
+
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1920px;
+$font: "Agency FB";
+
+#root {
+  margin: 0 auto;
+  width: 80%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.header{
+  position: fixed;
+  z-index: 10;
+  background-color:white;
+  width: 100vw;
+  left: 0;
+
+  &__title{
+    margin: 10px auto;
+    width: 78%;
+    font-family: $font;
+    letter-spacing: 3px;
+
+    @media(max-width: $lg) {
+      font-size: 4em;
+      text-align: center;
+    }
+    @media(max-width: $lg) and (orientation: landscape){
+      font-size: 3em;
+    }
+  }
+}
+
+.img {
+  border: 0;
+  margin: 5px;
+  border-radius: 50%;
+  transition: all 150ms ease-in-out;
+
+  @media(max-width: $lg) {
+    width: 20%;
+  }
+  @media(max-width: $lg) and (orientation: landscape){
+    width: 10%;
+  }
+
+  &:hover{
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+  }
+
+  &.is-highlighted{
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 1s linear infinite;
+  }
+}
+
+
+
+.gravatars{
+  display: flex ;
+  flex-wrap: wrap;
+  padding-top: 70px;
+  // justify-content: center;
+  @media (max-width: $lg) {
+    justify-content: center;
+    padding-top: 100px;
+  }
+}
+
+
+.modal{
+  position: fixed;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  width: 15vw;
+  height: 30vh;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 30px grey;
+ z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: $lg) {
+    width: 90vw;
+    height: 90vh;
+
+  }
+
+  &__img{
+    height: 20vh;
+    margin: 30px auto 10px auto;
+    border-radius: 50%;
+
+    @media(max-width: $lg) and (orientation: landscape){
+      height: 30vh;
+    }
+  }
+
+  &__text{
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 100;
+
+    @media(max-width: $lg) {
+      font-size: 3em;
+    }
+    @media(max-width: $lg) and (orientation: landscape){
+      font-size: 2em;
+    }
+  }
+  &__button{
+    background-color: white;
+    outline: none;
+    border: none;
+    box-shadow: 1px 1px 10px gray;
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 20px auto 30px auto;
+
+    @media(max-width: $lg) {
+      margin: 40px auto 40px auto;
+      font-size: 3em;
+      padding: 20px 30px;
+    }
+    @media(max-width: $lg) and (orientation: landscape){
+      font-size: 2em;
+      padding: 10px 15px;
+    }
+  }
+}
+
+
+///* Extra small devices (phones, 600px and down) */
+//@media only screen and (max-width: 600px) {
+//  .img{
+//    width: 20%;
+//  }
+//  .header__title{
+//    width: 50%;
+//  }
+//
+//}
+//
+///* Small devices (portrait tablets and large phones, 600px and up) */
+//@media only screen and (min-width: 600px) {
+//  .img{
+//    width: 20%;
+//  }
+//  .gravatars{
+//    justify-content: center;
+//    padding-top: 100px;
+//  }
+//  .header__title{
+//    font-size: 4rem;
+//    text-align: center;
+//  }
+//
+//}
+//
+///* Medium devices (landscape tablets, 768px and up) */
+//@media only screen and (min-width: 768px) {
+//
+//}
+//
+///* Large devices (laptops/desktops, 992px and up) */
+//@media only screen and (min-width: 992px) {}
+//
+///* Extra large devices (large laptops and desktops, 1200px and up) */
+//@media only screen and (min-width: 1200px) {
+//  .img{
+//    width: auto;
+//  }
+//  .gravatars{
+//    justify-content: normal;
+//    padding-top: 80px;
+//  }
+//  .header__title{
+//    font-size: 3em;
+//    text-align: left;
+//  }
+//}

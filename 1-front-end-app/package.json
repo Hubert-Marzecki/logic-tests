@@ -1,0 +1,30 @@
+{
+  "name": "swing-dev-mastaz-front-end-task",
+  "version": "1.0.0",
+  "description": "A repository of logic tasks for people who want to attend the SwingDev MaStaż internship program",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack-dev-server -d --progress --colors --inline --open"
+  },
+  "author": "Aleksander Stós <aleksander.stos@swing.dev>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.9.6",
+    "babel-loader": "8.1.0",
+    "css-loader": "^3.5.3",
+    "html-webpack-plugin": "4.3.0",
+    "sass": "^1.26.7",
+    "sass-loader": "^8.0.2",
+    "style-loader": "1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.9.6",
+    "core-js": "3.6.5",
+    "js-md5": "0.7.3",
+    "whatwg-fetch": "3.0.0"
+  }
+}
