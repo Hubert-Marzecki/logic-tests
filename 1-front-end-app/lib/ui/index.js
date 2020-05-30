@@ -9,9 +9,9 @@ export function setupListeners (window, gravatarContainer) {
     gravatars(window, gravatarContainer)
   })
 
-  window.addEventListener('resize', () => {
-    gravatars(window, gravatarContainer)
-  })
+  // window.addEventListener('resize', () => {
+  //   gravatars(window, gravatarContainer)
+  // })
 }
 
 export function init (window, root) {

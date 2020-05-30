@@ -6,7 +6,6 @@ interface TransactionBasic {
   time: number;
 }
 
-
 export const getBalanceByCategoryInPeriod = (
   transactionsList: Transaction[],
   category: string,
@@ -14,17 +13,17 @@ export const getBalanceByCategoryInPeriod = (
   endTime: string
 ): number => {
   //  czy potrzebne?
-  function setEndDate(date) {
-    date = date ? new Date(date) : new Date();
-    // Zwraca godziny dla określonej daty stosownie do czasu uniwersalnego.
-    if (date.getUTCHours() <= 0) {
-      date.setDate(date.getDate() + 1);
-      date.setHours(0);
-      date.setMinutes(0);
-    }
-    // convert date to object
-    return Date.parse(date);
-  }
+  // function setEndDate(date) {
+  //   date = date ? new Date(date) : new Date();
+  //   // Zwraca godziny dla określonej daty stosownie do czasu uniwersalnego.
+  //   if (date.getUTCHours() <= 0) {
+  //     date.setDate(date.getDate() + 1);
+  //     date.setHours(0);
+  //     date.setMinutes(0);
+  //   }
+  //   // convert date to object
+  //   return Date.parse(date);
+  // }
 
   let startDate: number = Date.parse(startTime);
   let endDate: number = Date.parse(endTime);

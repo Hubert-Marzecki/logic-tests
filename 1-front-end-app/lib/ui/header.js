@@ -1,11 +1,14 @@
-export default function (window, text) {
-  const headerElem = window.document.createElement('header')
-  const titleElem = window.document.createElement('h1')
-  titleElem.innerText = text || 'Facewall';
-  headerElem.classList.add("header")
-  titleElem.classList.add("header__title")
+import {createElement, addClassName, addText, addChild, addProperties} from '../../utilities';
 
-  headerElem.appendChild(titleElem)
+
+export default function Header (window) {
+  const headerElem = createElement('header')
+  addProperties(headerElem, "header", "", "");
+  
+  const headerTitle = createElement('h1')
+  addProperties(headerTitle, "header__title", "Facewall", "");
+
+  addChild(headerElem, headerTitle)
 
   return headerElem
 }

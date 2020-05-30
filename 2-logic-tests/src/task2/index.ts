@@ -36,19 +36,22 @@ export const findDuplicateTransactions = (
     arr.push(elem);
     return elem;
   }
-
+// zwracamy tablice i element ktorego szukalismy
+// element moze byc ten co wyszedl z getter'a,
+// albo default
   function getOrAdd<T>(
     arr: Array<T>,
     getter: (arr: Array<T>) => T | undefined,
     defaultValue: T
-  ): T {
+  ): [Array<T>, T] {
     const elem = getter(arr);
     if (elem === undefined) {
-      return push(arr, defaultValue);
+      return [[...arr, defaultValue], defaultValue];
     } else {
-      return elem;
+      return [arr, elem];
     }
   }
+  
   function last<T>(arr: Array<T>): T | undefined {
     return arr[arr.length - 1];
   }
@@ -61,15 +64,16 @@ export const findDuplicateTransactions = (
     buckets: Array<Array<Transaction>>,
     transaction: Transaction
   ): Array<Array<Transaction>> => {
-    const lastBucket: Array<Transaction> = getOrAdd(buckets, last, []);
+    // push jest słaby -> ale, w tym wypadku korzystamy tylko z lokalnych zmiennych a nie zmianieamy globalnych
+    const [newBuckets, lastBucket] = getOrAdd(buckets, last, []);
     const lastElement = last(lastBucket);
     if (lastElement === undefined || isDuplicated(lastElement, transaction)) {
       lastBucket.push(transaction);
     } else {
       // return [...buckets, [transaction]]
-      buckets.push([transaction]);
+      newBuckets.push([transaction]);
     }
-    return buckets;
+    return newBuckets;
   };
 
   return transactions

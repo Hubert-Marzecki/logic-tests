@@ -1,6 +1,6 @@
 import generateGravatarURL from '../gravatar-url'
-import modal, {displayModal} from "./modal";
-import gravatarUrl from "../gravatar-url";
+import {displayModal} from "./modal";
+import { addProperties } from '../../utilities';
 
 const IMAGE_SIZE = 64;
 const EXTRA_ROWS = 2;
@@ -11,21 +11,20 @@ export function createImages (window, numberOfImages) {
 
 export function gravatarImage (window) {
   const img = new window.Image()
-  img.src = generateGravatarURL(IMAGE_SIZE).imgUrl
-  img.url = generateGravatarURL(IMAGE_SIZE).email
-  img.classList.add("img")
+  addProperties(img, "img", "", generateGravatarURL(IMAGE_SIZE).imgUrl)
+    // img.src = generateGravatarURL(IMAGE_SIZE).imgUrl
+  // img.classList.add("img")
+  
   img.addEventListener('click', (e) => {
     e.target.classList.toggle('is-highlighted');
-    displayModal(e, img.url);
+    displayModal(e, generateGravatarURL(IMAGE_SIZE).email);
   })
   return img
 }
 
 export function calculateNumberOfImages (window, root) {
   const currentImages = window.document.querySelectorAll('img').length
-
   const width = root.offsetWidth + window.scrollX
-
   const height = window.innerHeight + window.scrollY
   // const  documentWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
