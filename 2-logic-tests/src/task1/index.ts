@@ -1,10 +1,9 @@
-interface Transaction {
-  id: number
-  sourceAccount: string,
-  targetAccount: string,
+import {Transaction} from "../Model";
+
+interface TransactionBasic {
   amount: number,
   category: string,
-  time: string,
+  time: number,
 }
 var transacts = [
   {
@@ -108,12 +107,13 @@ const transactsExpects = [
 
 // https://gist.github.com/camisetags/10b5656411c683646193acdbb606535e
 export const getBalanceByCategoryInPeriod = (
-  transactionsList:Transaction[] = [],
-  category:string,
-  start:any,
-  end:any
+    transactionsList: Transaction[],
+    category: string,
+    startTime: string,
+    endTime: string
 ) :number=> {
 
+//  czy potrzebne?
 function setEndDate(date) {
   date = date ? new Date(date) : new Date();
   // Zwraca godziny dla określonej daty stosownie do czasu uniwersalnego.
@@ -124,26 +124,26 @@ function setEndDate(date) {
   }
   // convert date to object
   return Date.parse(date);
-}
-// resonable - get time
-  start = Date.parse(start);
-  end = setEndDate(end); 
-  
-  const trans = transactionsList.map((transaction) => {
-      const { id, sourceAccount, targetAccount, ...cleanTransaction } = transaction;
-      return {
-        ...cleanTransaction,
-        // return date of transaction
-        time: Date.parse(cleanTransaction.time)
-      };
 
-    }).filter((transaction) =>
-    // chceck is end false
-      !!end
-      ? (transaction.category === category && 
-        (transaction.time >= start && transaction.time <= end))
-      : (transaction.category === category && transaction.time >= start)
-    ).reduce((totalBalance, transaction) => totalBalance + transaction.amount, 0);
+}
+
+  let startDate : number= Date.parse(startTime);
+  let endDate :number = Date.parse(endTime);
+
+  const transactionBasic :TransactionBasic[] = transactionsList.map((transfer:Transaction) => {
+    const { id, sourceAccount, targetAccount, ...transactionBasic } = transfer;
+    return {
+      ...transactionBasic,
+      time: Date.parse(transactionBasic.time)
+    };
+    })
+
+  const transactionInTime:TransactionBasic[] = transactionBasic.filter((transfer:TransactionBasic) =>
+      (transfer.category === category &&
+          (transfer.time >= startDate && transfer.time <= endDate))
+  )
+
+  const balance : number= transactionInTime.reduce((cumulatedBalance:number, transfer:TransactionBasic) => cumulatedBalance + transfer.amount, 0);
   
-  return trans;
+  return balance;
       }

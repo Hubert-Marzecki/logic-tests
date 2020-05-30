@@ -1,47 +1,75 @@
-interface Transaction {
-  id: number
-  sourceAccount: string,
-  targetAccount: string,
-  amount: number,
-  category: string,
-  time: string,
-}
-export const findDuplicateTransactions = (transactions:any[] = []) :Transaction[]=> {
-
-  const difference = (t1:string, t2:any) :any => {
-    // abs zwraca wartość bezwzględną danej liczby.
-    return Math.abs(<any>new Date(t1).getTime() - <any>new Date(t2))
-   }
-
-   function compareObjects(obj1:Transaction,obj2:Transaction){
-    return obj1.id !== obj2.id 
-           &&  obj1.sourceAccount === obj2.sourceAccount
-           &&  obj1.targetAccount === obj2.targetAccount
-           &&  obj1.amount === obj2.amount
-           &&  obj1.category === obj2.category
+import { Transaction } from "../Model";
+export const findDuplicateTransactions = (
+  transactions: Transaction[]
+): Transaction[][] => {
+  function timeDifference(a: string, b: string): number {
+    return Math.abs(
+      <number>new Date(a).getTime() - <number>new Date(b).getTime()
+    );
   }
-  // The localeCompare() method returns a number indicating whether a reference string comes before, or after, or is the same as the given string in sort order.
-  transactions.sort(({ time: a }, { time: b }) => a.localeCompare(b))
-  let output = [];
-  let grouped =[];
 
-  for(let i=0; i<transactions.length; i++){
-    let groups =[transactions[i]];
-    if(!grouped.includes(transactions[i]) ){
-      for(let j=0; j<transactions.length; j++){
-        if(compareObjects(transactions[i],transactions[j])){
-          if( difference(groups[groups.length-1].time,transactions[j].time) < 60000 ){
-            groups.push(transactions[j])
-            grouped.push(transactions[j])
-          }
-        }
-      }
+  function isDuplicated(a: Transaction, b: Transaction): boolean {
+    return (
+      a.id !== b.id &&
+      a.sourceAccount === b.sourceAccount &&
+      a.targetAccount === b.targetAccount &&
+      a.amount === b.amount &&
+      a.category === b.category &&
+      timeDifference(a.time, b.time) < 60000
+    );
+  }
+
+  // const dupa : Transaction[] = transactions.filter(isDublicated(transactions[0], transactions[1]))
+
+  // [[t1, t2], [t3], ]
+  // t1.time -> t2.time
+  // [], [transakcja] =>
+
+  // posortowanie transakcji po czasie
+  // bierzemy nowa transakcje,
+  // patrzymy czy pasuje do ostatniego z zakresów transakcji
+  // jezeli pasuje, to dodajemy do zakresu
+  // jezeli nie, tworzymy nowy zakres
+
+  const buckets: Array<Array<Transaction>> = [];
+  const sortedTransactions = transactions.sort(
+    (a: Transaction, b: Transaction) => a.time.localeCompare(b.time)
+  );
+  function push<T>(arr: Array<T>, elem: T): T {
+    arr.push(elem);
+    return elem;
+  }
+  function getOrAdd<T>(
+    arr: Array<T>,
+    getter: (arr: Array<T>) => T | undefined,
+    defaultValue: T
+  ): T {
+    const elem = getter(arr);
+    if (elem === undefined) {
+      return push(arr, defaultValue);
+    } else {
+      return elem;
     }
-    if(groups.length > 1 ) output.push(groups);
   }
-  
-  return output;
-}
+  function last<T>(arr: Array<T>): T | undefined {
+    return arr[arr.length - 1];
+  }
+  const putTransactionInLastCompatibleBucketOrNew = (
+    buckets: Array<Array<Transaction>>,
+    transaction: Transaction
+  ) => {
+    const lastBucket: Array<Transaction> = getOrAdd(buckets, last, []);
+    const lastElement = last(lastBucket);
+    if (lastElement === undefined || isDuplicated(lastElement, transaction)) {
+      lastBucket.push(transaction);
+    } else {
+      buckets.push([transaction]);
+    }
+  };
+  for (let transaction of sortedTransactions) {
+    putTransactionInLastCompatibleBucketOrNew(buckets, transaction);
+  }
+  const result = buckets.filter(it => it.length > 1);
 
-
-
+  return  result;
+};
