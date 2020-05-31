@@ -3,7 +3,7 @@ import {displayModal} from "./modal";
 import { addProperties } from '../../utilities';
 
 const IMAGE_SIZE = 64;
-const EXTRA_ROWS = 4;
+const EXTRA_ROWS = 2;
 
 export function createImages (window, numberOfImages) {
   return Array.apply(null, Array(numberOfImages)).map(() => gravatarImage(window))
@@ -11,12 +11,12 @@ export function createImages (window, numberOfImages) {
 
 export function gravatarImage (window) {
   const img = new window.Image()
-  const imgUrl = generateGravatarURL(IMAGE_SIZE).email
+  const email = generateGravatarURL(IMAGE_SIZE).email
   addProperties(img, "img", "", generateGravatarURL(IMAGE_SIZE).imgUrl)
 
   img.addEventListener('click', (e) => {
     e.target.classList.toggle('is-highlighted');
-    displayModal(e, imgUrl);
+    displayModal(e, email);
   })
   return img
 }

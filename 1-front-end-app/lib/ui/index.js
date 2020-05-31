@@ -6,6 +6,10 @@ export function setupListeners (window, gravatarContainer) {
   window.addEventListener('scroll', () => {
     gravatars(window, gravatarContainer)
   })
+
+  window.addEventListener('resize', () => {
+    gravatars(window, gravatarContainer)
+  })
 }
 
 export function init (window, root) {
