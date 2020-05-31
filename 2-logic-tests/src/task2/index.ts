@@ -2,6 +2,8 @@ import { Transaction } from "../Model";
 export const findDuplicateTransactions = (
   transactions: Transaction[]
 ): Transaction[][] => {
+
+
   function timeDifference(a: string, b: string): number {
     return Math.abs(
       <number>new Date(a).getTime() - <number>new Date(b).getTime()
@@ -19,26 +21,8 @@ export const findDuplicateTransactions = (
     );
   }
 
-  // const dupa : Transaction[] = transactions.filter(isDublicated(transactions[0], transactions[1]))
+  const compareTime : (a:Transaction, b:Transaction) => number = (a: Transaction, b: Transaction) => a.time.localeCompare(b.time);
 
-  // [[t1, t2], [t3], ]
-  // t1.time -> t2.time
-  // [], [transakcja] =>
-
-  // posortowanie transakcji po czasie
-  // bierzemy nowa transakcje,
-  // patrzymy czy pasuje do ostatniego z zakresów transakcji
-  // jezeli pasuje, to dodajemy do zakresu
-  // jezeli nie, tworzymy nowy zakres
-  const compareTime = (a: Transaction, b: Transaction) => a.time.localeCompare(b.time);
-
-  function push<T>(arr: Array<T>, elem: T): T {
-    arr.push(elem);
-    return elem;
-  }
-// zwracamy tablice i element ktorego szukalismy
-// element moze byc ten co wyszedl z getter'a,
-// albo default
   function getOrAdd<T>(
     arr: Array<T>,
     getter: (arr: Array<T>) => T | undefined,
@@ -64,14 +48,12 @@ export const findDuplicateTransactions = (
     buckets: Array<Array<Transaction>>,
     transaction: Transaction
   ): Array<Array<Transaction>> => {
-    // push jest słaby -> ale, w tym wypadku korzystamy tylko z lokalnych zmiennych a nie zmianieamy globalnych
     const [newBuckets, lastBucket] = getOrAdd(buckets, last, []);
     const lastElement = last(lastBucket);
     if (lastElement === undefined || isDuplicated(lastElement, transaction)) {
       lastBucket.push(transaction);
     } else {
-      // return [...buckets, [transaction]]
-      newBuckets.push([transaction]);
+      return [...buckets, [transaction]]
     }
     return newBuckets;
   };

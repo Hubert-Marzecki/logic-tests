@@ -2,18 +2,26 @@
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-//@font-face {
-//  font-family: "Jost-medium";
-//  src: url('./assets/Jost-500-Medium.ttf');
-//}
+@font-face {
+ font-family: "Jost-medium";
+ src: url('./assets/Jost-500-Medium.ttf');
+}
 
+$font-standard: "Jost-medium";
+
+@mixin font {
+  font-family: $font-standard;
+  color: $font-color
+}
 
 $sm: 576px;
 $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 $xxl: 1920px;
-$font: "Agency FB";
+
+$font-color: black;
+$color-standard: white;
 
 #root {
   margin: 0 auto;
@@ -29,15 +37,19 @@ body {
 }
 .header{
   position: fixed;
-  z-index: 10;
-  background-color:white;
   width: 100vw;
+
   left: 0;
+  z-index: 10;
+  background-color:$color-standard;
+ 
 
   &__title{
     margin: 10px auto;
     width: 78%;
-    font-family: $font;
+    @include font();
+    
+    font-family: $font-standard;
     letter-spacing: 3px;
 
     @media(max-width: $lg) {
@@ -82,7 +94,6 @@ body {
   display: flex ;
   flex-wrap: wrap;
   padding-top: 70px;
-  // justify-content: center;
   @media (max-width: $lg) {
     justify-content: center;
     padding-top: 100px;
@@ -97,10 +108,10 @@ body {
   transform: translate(-50%,-50%);
   width: 15vw;
   height: 30vh;
-  background-color: white;
+  background-color: $color-standard;
   border-radius: 5px;
   box-shadow: 1px 1px 30px grey;
- z-index: 100;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,7 +148,7 @@ body {
     }
   }
   &__button{
-    background-color: white;
+    background-color: $color-standard;
     outline: none;
     border: none;
     box-shadow: 1px 1px 10px gray;
@@ -159,53 +170,3 @@ body {
   }
 }
 
-
-///* Extra small devices (phones, 600px and down) */
-//@media only screen and (max-width: 600px) {
-//  .img{
-//    width: 20%;
-//  }
-//  .header__title{
-//    width: 50%;
-//  }
-//
-//}
-//
-///* Small devices (portrait tablets and large phones, 600px and up) */
-//@media only screen and (min-width: 600px) {
-//  .img{
-//    width: 20%;
-//  }
-//  .gravatars{
-//    justify-content: center;
-//    padding-top: 100px;
-//  }
-//  .header__title{
-//    font-size: 4rem;
-//    text-align: center;
-//  }
-//
-//}
-//
-///* Medium devices (landscape tablets, 768px and up) */
-//@media only screen and (min-width: 768px) {
-//
-//}
-//
-///* Large devices (laptops/desktops, 992px and up) */
-//@media only screen and (min-width: 992px) {}
-//
-///* Extra large devices (large laptops and desktops, 1200px and up) */
-//@media only screen and (min-width: 1200px) {
-//  .img{
-//    width: auto;
-//  }
-//  .gravatars{
-//    justify-content: normal;
-//    padding-top: 80px;
-//  }
-//  .header__title{
-//    font-size: 3em;
-//    text-align: left;
-//  }
-//}
