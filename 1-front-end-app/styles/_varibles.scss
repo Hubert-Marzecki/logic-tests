@@ -1,0 +1,29 @@
+  //  fonts
+  @font-face {
+    font-family: "Jost-medium";
+    src: url('./assets/Jost-500-Medium.ttf');
+   }
+
+  $font-standard: "Jost-medium";
+
+   @mixin font {
+     font-family: $font-standard;
+     color: $font-color;
+     font-size: 16px;
+   }
+   
+
+   
+  // colors
+   $color-standard: white;
+   $font-color: black;
+
+  //  box-properties
+   $box-shadow: 0 0.5rem 1rem rgba(black, 0.35) !default;
+
+  //  breakpoints
+   $sm: 576px;
+   $md: 768px;
+   $lg: 992px;
+   $xl: 1200px;
+   $xxl: 1920px;

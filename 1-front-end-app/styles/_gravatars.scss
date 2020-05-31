@@ -1,0 +1,42 @@
+@import "./varibles.scss";
+
+
+.img {
+    margin: 5px;
+    border-radius: 50%;
+    transition: all 150ms ease-in-out;
+
+    //  changes
+    width: 100px;
+
+    @media(max-width: $lg) {
+      width: 20%;
+    }
+    @media(max-width: $lg) and (orientation: landscape){
+      width: 10%;
+    }
+  
+    &:hover{
+      -webkit-filter: blur(3px);
+      filter: blur(3px);
+    }
+  
+    &.is-highlighted{
+      -webkit-animation:spin 1s linear infinite;
+      -moz-animation:spin 1s linear infinite;
+      animation:spin 1s linear infinite;
+    }
+  }
+  
+  .gravatars{
+    display: flex ;
+    flex-wrap: wrap;
+
+    // changes
+    padding-top: 70px;
+
+    @media (max-width: $lg) {
+      justify-content: center;
+      padding-top: 100px;
+    }
+  }

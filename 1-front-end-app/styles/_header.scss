@@ -1,0 +1,24 @@
+.header{
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    z-index: 10;
+    background-color:$color-standard;
+   
+  
+    &__title{
+      margin: 10px auto;
+      width: 79%;
+      font-family: $font-standard;
+      letter-spacing: 3px;
+  
+      @media(max-width: $lg) {
+        font-size: 4em;
+        text-align: center;
+      }
+      @media(max-width: $lg) and (orientation: landscape){
+        font-size: 3em;
+      }
+    }
+  }
+  
