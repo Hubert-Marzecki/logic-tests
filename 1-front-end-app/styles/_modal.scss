@@ -1,3 +1,4 @@
+@import "varibles";
 .modal{
     position: fixed;
     left: 50%;
@@ -53,6 +54,7 @@
       border: none;
       box-shadow: $box-shadow;
       border-radius: 5px;
+      cursor: pointer;
 
       // changes
       padding: 5px 10px;

@@ -1,4 +1,4 @@
-import {createElement, addClassName, addText, addChild, addProperties} from '../../utilities';
+import {createElement, addChild, addProperties} from '../../utilities';
 
 
 export default function Header (window) {
