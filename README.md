@@ -3,7 +3,7 @@
 - The first assignment is CSS/JS based task. 
   - Add RWD 
   - Add modal with image and email 
--Logic skills in action
+- Logic skills in action
   - Select transactions from time period
   - Detect transactions that were made in one minute & with the same ammout of money
 
